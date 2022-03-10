@@ -1,0 +1,2070 @@
+{
+                                                                  "openapi": "3.0.1",
+  "info": {
+                                                      "title": "IoTProduct",
+    "description": "The IoT Get Product Configuration resource.",
+    "contact": {
+      "name": "T-Mobile IoT Emerging Technology",
+      "url": "https://gitlab.com/tmobile/emergingtechnology",
+      "email": "EmergingTech_Team_Loom_FTE@t-mobile.com"
+    },
+    "version": "2.1.0"
+  },
+  "servers": [
+    {
+      "url": "dev02.api.t-mobile.com/iotcp/v2/product",
+      "description": "Base URL for dev"
+    },
+    {
+      "url": "https://qat02.api.t-mobile.com/iotcp/v2/product",
+      "description": "base URL for qat"
+    },
+    {
+      "url": "https://core.saas.api.t-mobile.com/iotcp/v2/product",
+      "description": "base URL for prod"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Get Product Config Details V2",
+      "description": "The base resource path with a GET method and query parameters defines a search for an array of productConfiguration objects that match the given criteria, or an empty array if none are found."
+    }
+  ],
+  "paths": {
+    "/iot-products/": {
+      "post": {
+        "x-data-sensitivity": "Public",
+        "x-type-of-consumer": "ISD",
+        "tags": [
+          "ProductConfigDetails"
+        ],
+        "summary": "A get for the payloadcollection resource using Digital Archecture's QueryCollection pattern.",
+        "description": "The base resource path with a GET method and query parameters defines a search for an array of productConfiguration objects that match the given criteria, or an empty array if none are found.",
+        "operationId": "ProductConfigDetails",
+        "security": [
+          {
+            "oauth2-accessCode": [],
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Content-type",
+            "in": "header",
+            "description": "The MIME type of this content",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[ \\S]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "Accept-Encoding",
+            "in": "header",
+            "description": "List of acceptable encodings. See HTTP compression.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S ]*$",
+              "type": "string"
+            },
+            "example": "gzip,deflate"
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "List of acceptable human languages for response",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S ]*$",
+              "type": "string"
+            },
+            "example": "en-us,en;q=0.5"
+          },
+          {
+            "name": "Date",
+            "in": "header",
+            "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+            "schema": {
+              "pattern": "^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), [0-3]{1}[0-9]{1} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-3][0-9]{3} [0-2][0-9]:[0-6][0-9]:[0-6][0-9] GMT$",
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "Mon, 05 Mar 2018 16:38:08 GMT"
+          },
+          {
+            "name": "activity-id",
+            "in": "header",
+            "description": "Unique id alphanumeric value generated and sent by the partner to identify every the service request uniquely. Sample: XyzA:D1s5s1i-X6AFRvfiPBfs-1234  Pass as is to downstream calls.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "c34e7acd-384b-4c22-8b02-ba3963682508"
+          },
+          {
+            "name": "interaction-id",
+            "in": "header",
+            "description": "Alphanumeric value represent a common transaction id across all calls made from UI, while completing all business activity needs of a particular customer.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "cc688d54-50d1-49d4-8c5d-95459d1172e8"
+          },
+          {
+            "name": "service-transaction-id",
+            "in": "header",
+            "description": "Request ID echoed back by server",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "23409209723"
+          },
+          {
+            "name": "session-id",
+            "in": "header",
+            "description": "A value populated by the sender used to track the transactions that occur during a session, a long-lasting interaction that ismaintained by the sender.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "350b91ec-4a64-4b10-a3f3-a78c8db3924a"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "ms since 1/1/70 adjusted to GMT",
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 0,
+              "pattern": "^[\\d]*$",
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": 1524599536
+          },
+          {
+            "name": "workflow-id",
+            "in": "header",
+            "description": "Business Use Case",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "ACTIVATION"
+          },
+          {
+            "name": "x-auth-originator",
+            "in": "header",
+            "description": "API chain initiating callers access token",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "c34e7acd-384b-4c22-8b02-ba3963682508"
+          },
+          {
+            "name": "x-authorization",
+            "in": "header",
+            "description": "Contains Proof of Possession token generated by API caller",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S ]*$",
+              "type": "string"
+            },
+            "example": "c34e7acd-384b-4c22-8b02-ba3963682508"
+          },
+          {
+            "name": "application-id",
+            "in": "header",
+            "description": "AKMID of the calling service",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\S]*$",
+              "type": "string"
+            },
+            "example": "1234567"
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for retrieving a single product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductConfigRequestV2"
+              },
+              "example": {
+                "returnAll": true,
+                "page": 1,
+                "limit": 10,
+                "accountName": "Uber",
+                "productId": [
+                  "9f13fb91-0563-45a2-b921-ab293296315d"
+                ],
+                "productType": [
+                  "RATEPLAN"
+                ],
+                "productClassification": [
+                  "IOTCONNECTIVITY"
+                ],
+                "status": "Unmapped",
+                "simNumber": "123456789",
+                "zoneTiers": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Transfer-Encoding": {
+                "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity.",
+                "schema": {
+                  "maxLength": 15,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "Cache-Control": {
+                "description": "Cache policy supported for the resource by the server",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "service-transaction-id": {
+                "description": "Request ID echoed back by server",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "The ETag header specifies the unique entity tag value for the returned resource.",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "Content-Encoding": {
+                "description": "The type of encoding used on the data",
+                "schema": {
+                  "maxLength": 15,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "Content-Length": {
+                "description": "Length of the response body in octets; not supported if Transfer-Endoding = chunked",
+                "schema": {
+                  "minimum": 0,
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "Content-Type": {
+                "description": "The MIME type of this content",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[ \\S]+$",
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductConfigResponse"
+                },
+                "example": {
+                  "pagination": {
+                    "totalPages": 1,
+                    "currentPageItems": 1,
+                    "totalRecordCount": 1,
+                    "limit": 250,
+                    "current": null,
+                    "next": null,
+                    "prev": null,
+                    "page": 1
+                  },
+                  "products": [
+                    {
+                      "id": "bca98491-fcdd-4e10-b36d-a9e4752e3e75",
+                      "productId": "mo-60ef80a9-ea6f-4f9a-b24a-631f9d4dbe35",
+                      "productType": "FINANCIAL",
+                      "productSubType": "TEXT",
+                      "productClassification": "IOTCONNECTIVITY",
+                      "shortDescription": "mno",
+                      "applicationId": "",
+                      "billingPlanId": "",
+                      "status": "Unmapped",
+                      "productVersion": 1,
+                      "inRelation": "false",
+                      "productOfferPrice": {
+                        "recurringPrice": 0,
+                        "oneTimePrice": 1
+                      },
+                      "chargeUnit": "USD",
+                      "recurringFrequency": "ONETIME",
+                      "level": "DEVICE",
+                      "eligibility": {
+                        "eligibleAccountCriteria": {
+                          "isShared": true,
+                          "eligibleAccounts": []
+                        },
+                        "eligibleProductCriteria": {
+                          "isShared": true,
+                          "eligibleProducts": []
+                        }
+                      },
+                      "offer": {
+                        "offerName": "mno",
+                        "offerId": 958118515,
+                        "extOfferId": null,
+                        "version": 1,
+                        "versionId": 0,
+                        "offerType": "ADDON",
+                        "offerSubType": "PACKAGE",
+                        "sku": "",
+                        "materialGroup": null,
+                        "offerStatus": "",
+                        "specGroup": null
+                      },
+                      "product": [],
+                      "createdDate": "10-18-2021 17:26:30",
+                      "userName": "pcadminuser",
+                      "chargeType": [
+                        {
+                          "chargeTypeId": "ACCOUNT_ADDON_2",
+                          "name": "ACCOUNT_ADDON_2"
+                        }
+                      ],
+                      "longDescription": "mno",
+                      "salesAllowed": false,
+                      "salesChannel": [
+                        {
+                          "salesChannelId": "Retail",
+                          "name": "Retail"
+                        }
+                      ],
+                      "effectiveDate": "10-19-2021 15:06:17",
+                      "expirationDate": "10-29-2021 23:30:00",
+                      "taxInclusive": false,
+                      "testDriveEligible": false,
+                      "mobileNetworkOperator": "T-Mobile US"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "400",
+                  "userMessage": "Bad Request",
+                  "systemMessage": "Bad Request",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "401",
+                  "userMessage": "Unauthorized",
+                  "systemMessage": "Unauthorized",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "404",
+                  "userMessage": "Resource not found",
+                  "systemMessage": "Resource not found",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "headers": {
+              "service-transaction-id": {
+                "description": "Request ID echoed back by server",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              },
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "Allow": {
+                "description": "list of supported methods for URI",
+                "schema": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "pattern": "^[\\S]*$",
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "405",
+                  "userMessage": "Method Not Allowed",
+                  "systemMessage": "Method Not Allowed",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Mismatching data format",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "406",
+                  "userMessage": "Mismatching data format",
+                  "systemMessage": "Mismatching data format",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "System Error",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "500",
+                  "userMessage": "System Error",
+                  "systemMessage": "System Error",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable",
+            "headers": {
+              "Date": {
+                "description": "The Date general HTTP header contains the date and time at which the message was originated.",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "503",
+                  "userMessage": "Service unavailable",
+                  "systemMessage": "Service unavailable",
+                  "detailLink": "http://www.tmus.com"
+                }
+              }
+            }
+          }
+        },
+        "x-api-pattern": "QueryCollection",
+        "x-codegen-request-body-name": "productConfigRequestV2"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProductConfigRequest": {
+        "type": "object",
+        "properties": {
+          "returnAll": {
+            "type": "boolean",
+            "description": "Return only published and sellable if and only if the flag is not provided or false."
+          },
+          "accountId": {
+            "type": "integer",
+            "description": "Jasper control center accountId",
+            "format": "int64",
+            "example": 500347741
+          },
+          "accountName": {
+            "type": "string",
+            "description": "Jasper account Name like Uber",
+            "example": "Uber"
+          },
+          "accountType": {
+            "type": "string",
+            "description": "Jasper account type like Essential or Advantage",
+            "example": "Essential"
+          },
+          "productId": {
+            "type": "array",
+            "description": "Array of ProductIds",
+            "items": {
+              "pattern": "^[\\S ]*$",
+              "type": "string",
+              "description": "product unique identifier",
+              "example": "In-a8fedecd-bcb1-11ea-a366-5d920ff78205"
+            }
+          },
+          "productName": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "product name",
+            "example": "IoT LTE 10MB Data Plan"
+          },
+          "productType": {
+            "minItems": 0,
+            "type": "array",
+            "description": "An array of productType enum strings.",
+            "items": {
+              "$ref": "#/components/schemas/ProductType"
+            }
+          },
+          "productSubType": {
+            "minItems": 0,
+            "type": "array",
+            "description": "An array of productSubType enum strings.",
+            "items": {
+              "$ref": "#/components/schemas/ProductSubType"
+            }
+          },
+          "productClassification": {
+            "minItems": 0,
+            "type": "array",
+            "description": "An array of productClassification enum strings.",
+            "items": {
+              "$ref": "#/components/schemas/ProductClassification"
+            }
+          },
+          "status": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-,\\.() ]*$",
+            "type": "string",
+            "description": "The human-readable status of the Product Configuration.",
+            "example": "Published"
+          },
+          "supportedAcctType": {
+            "type": "string",
+            "description": "Indicates Account Types",
+            "example": "STANDARD",
+            "enum": [
+              "STANDARD",
+              "ESSENTIAL",
+              "PRO",
+              "ENTERPRISE",
+              "ADVANTAGE",
+              "BOTH"
+            ]
+          },
+          "ratePlanId": {
+            "format": "int32",
+            "example": 31928,
+            "description": "rate plan unique identifier"
+          },
+          "ratePlanName": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "rate plan name",
+            "example": "IoT LTE 10MB Data Plan"
+          },
+          "offerId": {
+            "type": "integer",
+            "description": "offer unique id",
+            "format": "int32",
+            "example": 31928
+          },
+          "offerName": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "name of the offer"
+          },
+          "offerType": {
+            "type": "string",
+            "description": "Indicates Offer Type BASE, ADDON, ONDEMAND, TOPOFF, FEE",
+            "example": "ADDON",
+            "enum": [
+              "BASE",
+              "ADDON",
+              "ONDEMAND",
+              "TOPOFF",
+              "FEE",
+              "SUBSCRIPTION"
+            ]
+          },
+          "offerSubType": {
+            "type": "string",
+            "description": "Indicates Offer Sub-type SOFTGOOD, HARDGOOD, PACKAGE",
+            "example": "SOFTGOOD",
+            "enum": [
+              "SOFTGOOD",
+              "HARDGOOD",
+              "PACKAGE"
+            ]
+          },
+          "extOfferId": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "The external id of the Offer/Rateplan"
+          },
+          "testDriveEligible": {
+            "type": "boolean",
+            "description": "Return rateplans eligible for Test Drive when testDrive=True, else return all rateplans matching the query criteria."
+          },
+          "mobileNetworkOperator": {
+            "$ref": "#/components/schemas/MobileNetworkOperator"
+          },
+          "zoneTiers": {
+            "type": "boolean",
+            "description": "Return zoneTiers only when testDrive=true.",
+            "default": false
+          }
+        }
+      },
+      "ProductConfigRequestV2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductConfigRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "simNumber": {
+                "type": "string",
+                "description": "Number of the sim to be retrieved"
+              },
+              "page": {
+                "type": "integer",
+                "description": "Page Number",
+                "default": 1
+              },
+              "limit": {
+                "type": "integer",
+                "description": "Number of items to be retrieved",
+                "default": 250
+              },
+              "salesChannel": {
+                "type": "array",
+                "description": "Array of sales channel",
+                "items": {
+                  "pattern": "^[\\S ]*$",
+                  "type": "string",
+                  "description": "sales channel",
+                  "example": "Retail"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "description": "Total Number of Pages retrieved"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page number of results"
+          },
+          "currentPageItems": {
+            "type": "integer",
+            "description": "Current page items from result"
+          },
+          "totalRecordsCount": {
+            "type": "integer",
+            "description": "Total number of results found"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Limit number of items displayed per page"
+          },
+          "current": {
+            "type": "string",
+            "description": "URL for current page"
+          },
+          "next": {
+            "type": "string",
+            "description": "URL for next page"
+          },
+          "prev": {
+            "type": "string",
+            "description": "URL for prev page"
+          }
+        },
+        "description": "Response Body Format for Pagination Request"
+      },
+      "CommPlan": {
+        "required": [
+          "accountId",
+          "commPlanId",
+          "commPlanLabel",
+          "commPlanName",
+          "commPlanRefId",
+          "gprsEnabled3G",
+          "id",
+          "inputDate",
+          "lteData",
+          "onProfileName",
+          "processDateTime",
+          "publishedCommPlan",
+          "roamingRES",
+          "serviceProviderId",
+          "shared",
+          "sharedCommPlan",
+          "smsMOEnabled",
+          "smsMTEnabled",
+          "subCount",
+          "userId",
+          "voLTE",
+          "voiceMOEnabled",
+          "voiceMTEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "commPlanName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Name of the commPlan.",
+            "example": "Monthly"
+          },
+          "commPlanId": {
+            "type": "integer",
+            "description": "ID of the commPlan.",
+            "format": "int32",
+            "example": 10
+          },
+          "id": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "UUID of the commPlan document in the datastore.",
+            "example": "5e9cec7ac027535acab18bd5"
+          },
+          "onProfileName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "User facing profile name."
+          },
+          "sharedCommPlan": {
+            "type": "boolean",
+            "description": "The commplan is shared or not."
+          },
+          "smsMTEnabled": {
+            "type": "boolean",
+            "description": "The commplan has smsMT enabled."
+          },
+          "voiceMTEnabled": {
+            "type": "boolean",
+            "description": "The commplan has voiceMT enabled."
+          },
+          "commPlanRefId": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Ref ID of the commPlan.",
+            "example": "16960"
+          },
+          "commPlanLabel": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Label of the commPlan."
+          },
+          "inputDate": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Input date of the commPlan.",
+            "example": "2020-08-03T15:54:44.000Z"
+          },
+          "userId": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "User ID associated to the commPlan."
+          },
+          "processDateTime": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Time of processing.",
+            "example": "2020-08-03T15:54:44.000Z"
+          },
+          "subCount": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "description": "The subscriber count.",
+            "format": "int32",
+            "example": 10
+          },
+          "serviceProviderId": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "description": "The ID of the service provider.",
+            "format": "int32",
+            "example": 10
+          },
+          "accountId": {
+            "type": "integer",
+            "description": "jasper control center accountId",
+            "format": "int64",
+            "example": 500347741
+          },
+          "accountName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Jasper account Name.",
+            "example": "Uber"
+          },
+          "publishedCommPlan": {
+            "type": "boolean",
+            "description": "The commplan has been published or not."
+          },
+          "gprsEnabled3G": {
+            "type": "boolean",
+            "description": "The commplan has GPRS 3G enabled."
+          },
+          "smsMOEnabled": {
+            "type": "boolean",
+            "description": "The commplan has smsMO enabled."
+          },
+          "voiceMOEnabled": {
+            "type": "boolean",
+            "description": "The commplan has voiceMO enabled."
+          },
+          "roamingRES": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Roaming status of the commPlan.",
+            "example": "NOROAM"
+          },
+          "voLTE": {
+            "type": "boolean",
+            "description": "The commplan has voLTE."
+          },
+          "lteData": {
+            "type": "boolean",
+            "description": "The commplan has LTE."
+          },
+          "shared": {
+            "type": "boolean",
+            "description": "The commplan is shared."
+          }
+        }
+      },
+      "DefaultZone": {
+        "required": [
+          "bulkOverageEnable",
+          "dataRoundingUnit",
+          "includedData",
+          "includedDataUnit",
+          "useTheseDataRoundingSettlingsforAllZones",
+          "zoneUsageLimitUnit"
+        ],
+        "type": "object",
+        "properties": {
+          "includedData": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "includedDataUnit": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Data unit of the zone.",
+            "example": "MB"
+          },
+          "zoneUsageLimitUnit": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Data unit attributed to the usage limit of the zone.",
+            "example": "MB per subscriber"
+          },
+          "bulkOverageEnable": {
+            "type": "boolean",
+            "description": "Bulk overage is enabled or not."
+          },
+          "useTheseDataRoundingSettlingsforAllZones": {
+            "type": "boolean",
+            "description": "Whether or not to use settings for all zones."
+          },
+          "dataRoundingUnit": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Data unit used for rounding.",
+            "example": "None"
+          },
+          "dataRoundingFrequency": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Frequency of rounding the data.",
+            "example": "Per CDR"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "code",
+          "userMessage"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "A succinct, domain-specific, human-readable text string to identify the type of error for the given status code",
+            "example": "ProductNotFound"
+          },
+          "userMessage": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "A human-readable message describing the error.",
+            "example": "Failed to find product."
+          },
+          "systemMessage": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "type": "string",
+            "description": "Text that provides a more detailed technical explanation of the error",
+            "example": "PRODUCT_NOT_FOUND"
+          },
+          "detailLink": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "type": "string",
+            "description": "link to custom information providing greater detail on error or errors",
+            "example": "http://aaa.bbb.ccc/"
+          }
+        },
+        "description": "As defined in http://api-standards.apps.px-npe01.cf.t-mobile.com/http/status-codes/error-response-format/"
+      },
+      "ProductConfigResponse": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductConfiguration"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "description": "List of product configuration objects in addition to pagination parameters"
+      },
+      "ProductConfiguration": {
+        "required": [
+          "chargeUnit",
+          "createdDate",
+          "effectiveDate",
+          "eligibility",
+          "level",
+          "longDescription",
+          "productOfferPrice",
+          "recurringFrequency",
+          "salesAllowed",
+          "salesChannel",
+          "shortDescription",
+          "status",
+          "taxInclusive",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z\\d\\-]*$",
+            "type": "string",
+            "description": "Uniquely identifies a product specification.",
+            "example": "string"
+          },
+          "productId": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z\\d\\-]*$",
+            "type": "string",
+            "description": "Uniquely identifies a product specification.",
+            "example": "string"
+          },
+          "inRelation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "default": "false",
+            "description": "Describes relation b/w child and parent product",
+            "example": "true"
+          },
+          "productVersion": {
+            "type": "integer",
+            "description": "Identifies the product version.",
+            "example": 1
+          },
+          "productType": {
+            "$ref": "#/components/schemas/ProductType"
+          },
+          "productSubType": {
+            "$ref": "#/components/schemas/ProductSubType"
+          },
+          "productClassification": {
+            "$ref": "#/components/schemas/ProductClassification"
+          },
+          "shortDescription": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "type": "string",
+            "description": "The short description of the product specification, as defined in the product catalog.",
+            "example": "string"
+          },
+          "applicationId": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "Application ID.",
+            "example": "string"
+          },
+          "billingPlanId": {
+            "type": "string",
+            "description": "The ID of the Billing plan, conditional mandatory for rateplans."
+          },
+          "status": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-,\\.() ]*$",
+            "type": "string",
+            "description": "The human-readable status of the Product Configuration.",
+            "example": "Published"
+          },
+          "minQuantity": {
+            "type": "number",
+            "description": "minQuantity for bundle product – default 1 for non-bundle product. – for dialpad only applicable for new activation order"
+          },
+          "productOfferPrice": {
+            "$ref": "#/components/schemas/ProductOfferPrice"
+          },
+          "costPrice": {
+            "type": "number",
+            "description": "Cost Price of product.",
+            "format": "double"
+          },
+          "chargeUnit": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Charge unit of a product specification.",
+            "example": "USD"
+          },
+          "recurringFrequency": {
+            "type": "string",
+            "description": "Indicates Recurring frequency of charges for this product, recurringFrequency is required for producType is RATEPLAN or SERVICE but is not applicable if productType=BUNDLE ",
+            "example": "ONETIME",
+            "enum": [
+              "MONTHLY",
+              "WEEKLY",
+              "SEMIMONTHLY",
+              "BIWEEKLY",
+              "YEARLY",
+              "QUARTERLY",
+              "ONETIME",
+              "DAILY"
+            ]
+          },
+          "level": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Level for Account or Device Level of this product"
+          },
+          "eligibility": {
+            "type": "object",
+            "properties": {
+              "eligibleAccountCriteria": {
+                "required": [
+                  "isShared"
+                ],
+                "type": "object",
+                "properties": {
+                  "isShared": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "eligibleAccounts": {
+                    "type": "array",
+                    "description": "List of eligible accounts",
+                    "items": {
+                      "$ref": "#/components/schemas/Account"
+                    }
+                  }
+                }
+              },
+              "eligibleProductCriteria": {
+                "required": [
+                  "isShared"
+                ],
+                "type": "object",
+                "properties": {
+                  "isShared": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "eligibleProducts": {
+                    "type": "array",
+                    "description": "List of eligible product identifiers",
+                    "items": {
+                      "$ref": "#/components/schemas/GenericProductIdentifier"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "offer": {
+            "$ref": "#/components/schemas/Offer"
+          },
+          "ratePlan": {
+            "$ref": "#/components/schemas/RatePlan"
+          },
+          "commPlan": {
+            "$ref": "#/components/schemas/CommPlan"
+          },
+          "product": {
+            "type": "array",
+            "description": "Represents a bundled product consisting of one or more child products. Child product(s) can be another rate plan, add-on, fee or another bundled product.",
+            "items": {
+              "$ref": "#/components/schemas/ProductConfiguration"
+            }
+          },
+          "createdDate": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "Start DateTime of the Effective Time Period",
+            "example": "08-04-2020 16:58:05"
+          },
+          "userName": {
+            "maxLength": 20,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z\\d]*$",
+            "type": "string",
+            "description": "User name of the person (or system account) that initiated the event.",
+            "example": "string"
+          },
+          "supportedAcctType": {
+            "type": "string",
+            "description": "Indicates Account Types",
+            "example": "STANDARD",
+            "enum": [
+              "STANDARD",
+              "ESSENTIAL",
+              "PRO",
+              "ENTERPRISE",
+              "ADVANTAGE",
+              "BOTH"
+            ]
+          },
+          "chargeType": {
+            "type": "array",
+            "description": "Type of Charge",
+            "items": {
+              "$ref": "#/components/schemas/ChargeType"
+            }
+          },
+          "longDescription": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "type": "string",
+            "description": "The long description of the product specification, as defined in the product catalog.",
+            "example": "string"
+          },
+          "salesAllowed": {
+            "type": "boolean",
+            "description": "Whether sales are allowed."
+          },
+          "salesChannel": {
+            "type": "array",
+            "description": "Describes the manner in which contact is made between T-Mobile and the customer for the purpose of selling products. e.g. Web, Call Center, Distributor A, Retail.",
+            "items": {
+              "$ref": "#/components/schemas/GlobalSalesChannel"
+            }
+          },
+          "responseMsg": {
+            "type": "string",
+            "description": "Response message of the API operation."
+          },
+          "responseCode": {
+            "type": "string",
+            "description": "Response code of the API operation."
+          },
+          "effectiveDate": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "Start DateTime of the Effective Time Period",
+            "example": "09-02-2020 15:47:28"
+          },
+          "expirationDate": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "End DateTime of the Effective Time Period",
+            "example": "09-02-2020 15:47:28"
+          },
+          "taxInclusive": {
+            "type": "boolean",
+            "description": "Whether this configuration is tax inclusive."
+          },
+          "statusHistory": {
+            "type": "array",
+            "description": "Status Change History",
+            "items": {
+              "$ref": "#/components/schemas/StatusHistory"
+            }
+          },
+          "testDriveEligible": {
+            "type": "boolean",
+            "description": "Whether a plan is test drive eligible or not"
+          },
+          "mobileNetworkOperator": {
+            "$ref": "#/components/schemas/MobileNetworkOperator"
+          }
+        },
+        "description": "Product representing either a combination of rate and comm plan or representing an offer",
+        "example": {
+          "id": "95967bf3-17d1-44f0-bad5-3d050e0ed8c4",
+          "productId": "FB-a1081770-f852-11ea-9b0d-a31c80e6c6c6",
+          "shortDescription": "Free Trial 100MB",
+          "applicationId": "",
+          "billingPlanId": "ZNOSVCIOT",
+          "status": "Published",
+          "productVersion": 1,
+          "ratePlan": {
+            "ratePlanName": "Free Trial 100MB",
+            "ratePlanId": 402023240,
+            "version": 1,
+            "versionId": 402241840,
+            "planType": "Monthly - Individual Subscriber",
+            "chargeAmount": 0,
+            "planStatus": "Published",
+            "chargeUnit": "USD",
+            "accountName": "Shared"
+          },
+          "commPlan": {
+            "commPlanName": "Test SMS Intl",
+            "commPlanId": 400235740,
+            "onProfileName": "Test SMS Intl",
+            "sharedCommPlan": false,
+            "smsMTEnabled": true,
+            "voiceMTEnabled": false,
+            "inputDate": "2020-08-25T23:27:57.000Z",
+            "processDateTime": "2020-08-25T23:27:57.000Z",
+            "subCount": 1,
+            "serviceProviderId": 400092240,
+            "accountName": "T-Mobile for Business Testing Advantage",
+            "accountId": 500347740,
+            "publishedCommPlan": true,
+            "gprsEnabled3G": true,
+            "smsMOEnabled": true,
+            "voiceMOEnabled": false,
+            "roamingRES": "NOROAM",
+            "voLTE": false,
+            "lteData": true
+          },
+          "createdDate": "08-29-2020 16:39:08",
+          "userName": "kworkm01",
+          "supportedAcctType": "",
+          "chargeType": [
+            {
+              "chargeTypeId": "SUBS_MONTHLY",
+              "name": "SUBS_MONTHLY"
+            }
+          ],
+          "longDescription": "9/16 BVT",
+          "salesAllowed": true,
+          "salesChannel": [
+            {
+              "salesChannelId": "BusinessDirect",
+              "name": "BusinessDirect"
+            }
+          ],
+          "responseMsg": "Message Published Successfully",
+          "responseCode": "200",
+          "effectiveDate": "09-16-2020 12:27:17",
+          "expirationDate": "",
+          "taxInclusive": true,
+          "testDriveEligible": true,
+          "mobileNetworkOperator": "Bell Canada"
+        }
+      },
+      "ProductOfferPrice": {
+        "type": "object",
+        "properties": {
+          "recurringPrice": {
+            "type": "number",
+            "description": "ProductOfferPrice of the recurring standalone/bundled product.",
+            "format": "double"
+          },
+          "oneTimePrice": {
+            "type": "number",
+            "description": "ProductOfferPrice of the one-time standalone/bundled products.",
+            "format": "double"
+          }
+        },
+        "description": "Product Price offered to the customer."
+      },
+      "Offer": {
+        "required": [
+          "offerId",
+          "offerName",
+          "offerSubType",
+          "offerType"
+        ],
+        "type": "object",
+        "properties": {
+          "offerName": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "The common name of the product specification, as defined in the product catalog."
+          },
+          "offerId": {
+            "type": "integer",
+            "description": "Uniquely identifies a product specification.",
+            "format": "int32"
+          },
+          "extOfferId": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "The external id of the Offer/Rateplan"
+          },
+          "version": {
+            "type": "integer",
+            "description": "Version of a product specification.",
+            "format": "int32"
+          },
+          "versionId": {
+            "type": "integer",
+            "description": "Version ID of a product specification.",
+            "format": "int32"
+          },
+          "offerType": {
+            "type": "string",
+            "description": "Indicates Offer Type BASE, ADDON, ONDEMAND, TOPOFF, FEE",
+            "example": "ADDON",
+            "enum": [
+              "BASE",
+              "ADDON",
+              "ONDEMAND",
+              "TOPOFF",
+              "FEE",
+              "SUBSCRIPTION"
+            ]
+          },
+          "offerSubType": {
+            "type": "string",
+            "description": "Indicates Offer Sub-type SOFTGOOD, HARDGOOD, PACKAGE",
+            "example": "SOFTGOOD",
+            "enum": [
+              "SOFTGOOD",
+              "HARDGOOD",
+              "PACKAGE"
+            ]
+          },
+          "sku": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "SKU of a product specification."
+          },
+          "materialGroup": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Material Group from SAP."
+          },
+          "offerStatus": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Offer Status of a product specification."
+          },
+          "specGroup": {
+            "$ref": "#/components/schemas/SpecGroup"
+          }
+        }
+      },
+      "GlobalSalesChannel": {
+        "required": [
+          "name",
+          "salesChannelId"
+        ],
+        "type": "object",
+        "properties": {
+          "salesChannelId": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z\\d\\-]*$",
+            "type": "string",
+            "description": "Uniquely identifies the Sales Channel.",
+            "example": "string"
+          },
+          "name": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-,\\.() ]*$",
+            "type": "string",
+            "description": "The label by which the channel is known. This is a user-friendly name, appropriate for display. This should always be populated if possible, as this is the place   applications will look for a name to display to users.",
+            "example": "string"
+          }
+        },
+        "description": "Describes the manner in which contact is made between T-Mobile and the customer for the purpose of selling products. e.g. Web, Call Center, Distributor A, Retail.",
+        "example": {
+          "salesChannelId": "string",
+          "name": "string"
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "integer",
+            "description": "jasper control center accountId",
+            "format": "int64",
+            "example": 500347741
+          },
+          "accountName": {
+            "type": "string",
+            "description": "Jasper account Name like Uber",
+            "example": "Uber"
+          }
+        }
+      },
+      "GenericProductIdentifier": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "types like RATEPLAN, OFFER, COMMPLAN, PRODUCT",
+            "example": "PRODUCT"
+          },
+          "eligibleProductId": {
+            "pattern": "^[a-zA-Z0-9\\-,\\.() ]*$",
+            "type": "string",
+            "description": "generic identifier",
+            "example": "abcd00347741"
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the given rateplan or offer or commplan or product",
+            "example": "Free Trial 100MB"
+          },
+          "mobileNetworkOperator": {
+            "$ref": "#/components/schemas/MobileNetworkOperator"
+          }
+        }
+      },
+      "StatusHistory": {
+        "type": "object",
+        "properties": {
+          "modifiedDate": {
+            "pattern": "^[\\S ]*$",
+            "type": "string",
+            "description": "Start DateTime of the modification",
+            "example": "2020-01-30T09:30:10.000Z"
+          },
+          "modifiedBy": {
+            "maxLength": 20,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z\\d]*$",
+            "type": "string",
+            "description": "User name of the person (or system account) that modified this product",
+            "example": "string"
+          },
+          "status": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-,\\.() ]*$",
+            "type": "string",
+            "description": "Previous status of this Product",
+            "example": "string"
+          }
+        }
+      },
+      "ChargeType": {
+        "type": "object",
+        "properties": {
+          "chargeTypeId": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Type of the Charge",
+            "example": "SUBS_MONTHLY"
+          },
+          "name": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "Name of Charge Type",
+            "example": "SUBS_MONTHLY"
+          }
+        }
+      },
+      "RatePlan": {
+        "required": [
+          "planStatus",
+          "planType",
+          "ratePlanId",
+          "ratePlanName",
+          "version",
+          "versionId"
+        ],
+        "type": "object",
+        "properties": {
+          "ratePlanName": {
+            "type": "string",
+            "example": "T-Mobile Demo RP1"
+          },
+          "ratePlanId": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "format": "int32"
+          },
+          "extOfferId": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "description": "The external id of the Offer/Rateplan"
+          },
+          "version": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "versionId": {
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "type": "integer",
+            "format": "int32",
+            "example": 23901
+          },
+          "planType": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "example": "Monthly - Individual Subscriber"
+          },
+          "planStatus": {
+            "pattern": "^[\\S ]+$",
+            "type": "string",
+            "example": "PUBLISHED"
+          },
+          "chargeAllocation": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "number",
+                "description": "Allocated % of data",
+                "format": "double"
+              },
+              "sms": {
+                "type": "number",
+                "description": "Allocated % of data",
+                "format": "double"
+              },
+              "voice": {
+                "type": "number",
+                "description": "Allocated % of data",
+                "format": "double"
+              }
+            },
+            "description": "Allocation % between data, sms and voice",
+            "example": {
+              "data": 50.25,
+              "voice": 25.4,
+              "sms": 25.5
+            }
+          },
+          "zoneTiers": {
+            "$ref": "#/components/schemas/ZoneTiers"
+          },
+          "specGroup": {
+            "$ref": "#/components/schemas/SpecGroup"
+          }
+        },
+        "description": "Rateplan associated with the product config"
+      },
+      "ZoneTiers": {
+        "type": "array",
+        "description": "Data, Voice and SMS included allowances and Overage Tiers grouped by Zone",
+        "items": {
+          "type": "object",
+          "properties": {
+            "zone": {
+              "type": "string",
+              "description": "Zone",
+              "example": "US zone"
+            },
+            "includedAllowance": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "included": {
+                      "type": "number",
+                      "description": "allowance",
+                      "example": 2000
+                    },
+                    "unit": {
+                      "type": "string",
+                      "description": "Units of allowance",
+                      "example": "MB"
+                    }
+                  }
+                },
+                "sms": {
+                  "type": "object",
+                  "properties": {
+                    "included": {
+                      "type": "number",
+                      "description": "allowance",
+                      "example": 3000
+                    },
+                    "unit": {
+                      "type": "string",
+                      "description": "Units of allowance",
+                      "example": "MESSAGES"
+                    }
+                  }
+                },
+                "voice": {
+                  "type": "object",
+                  "properties": {
+                    "included": {
+                      "type": "number",
+                      "description": "allowance",
+                      "example": 1000
+                    },
+                    "unit": {
+                      "type": "string",
+                      "description": "Units of allowance",
+                      "example": "MINUTES"
+                    }
+                  }
+                }
+              },
+              "description": "Monthly allowance included as part of plan across data, SMS and voice",
+              "example": {
+                "data": {
+                  "included": 2000,
+                  "unit": "MB"
+                },
+                "sms": {
+                  "included": 3000,
+                  "unit": "MINUTES"
+                },
+                "voice": {
+                  "included": 1000,
+                  "unit": "MESSAGES"
+                }
+              }
+            },
+            "overageTiers": {
+              "type": "array",
+              "description": "Tiers of overgage charges across SMS, Voice and Data",
+              "example": [
+                {
+                  "tier": 1,
+                  "data": {
+                    "lowerThreshold": "2001",
+                    "upperThreshold": "5000",
+                    "cost": 1
+                  },
+                  "sms": {
+                    "lowerThreshold": "3001",
+                    "upperThreshold": "6000",
+                    "cost": 0.01
+                  },
+                  "voice": {
+                    "lowerThreshold": "1001",
+                    "upperThreshold": "2000",
+                    "cost": 0.01
+                  }
+                }
+              ],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tierLevel": {
+                    "type": "number",
+                    "description": "Tier number",
+                    "example": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "lowerThreshold": {
+                        "type": "string",
+                        "description": "Lower Threshold for tier",
+                        "example": "2001"
+                      },
+                      "upperThreshold": {
+                        "type": "string",
+                        "description": "Upper Threshold for tier",
+                        "example": "5000"
+                      },
+                      "overageRate": {
+                        "type": "number",
+                        "description": "Cost for overage / unit",
+                        "example": 1
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Units of overage",
+                        "example": "MB"
+                      }
+                    }
+                  },
+                  "sms": {
+                    "type": "object",
+                    "properties": {
+                      "lowerThreshold": {
+                        "type": "string",
+                        "description": "Lower Threshold for tier",
+                        "example": "3001"
+                      },
+                      "upperThreshold": {
+                        "type": "string",
+                        "description": "Upper Threshold for tier",
+                        "example": "6000"
+                      },
+                      "overageRate": {
+                        "type": "number",
+                        "description": "Cost for overage / unit",
+                        "example": 0.01
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Units of overage",
+                        "example": "MESSAGES"
+                      }
+                    }
+                  },
+                  "voice": {
+                    "type": "object",
+                    "properties": {
+                      "lowerThreshold": {
+                        "type": "string",
+                        "description": "Lower Threshold for tier",
+                        "example": "1001"
+                      },
+                      "upperThreshold": {
+                        "type": "string",
+                        "description": "Upper Threshold for tier",
+                        "example": "2000"
+                      },
+                      "overageRateOriginating": {
+                        "type": "number",
+                        "description": "Cost for originating calls overage / unit",
+                        "example": 0.01
+                      },
+                      "overageRateTerminating": {
+                        "type": "number",
+                        "description": "Cost for terminating calls overage / unit",
+                        "example": 0.01
+                      },
+                      "overageRate": {
+                        "type": "number",
+                        "description": "Cost for overage / unit",
+                        "example": 0.01
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Units of overage",
+                        "example": "MINUTES"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SpecGroup": {
+        "type": "array",
+        "description": "Name value pair.",
+        "example": [
+          {
+            "partnerInformation": "Microsoft 365"
+          },
+          {
+            "paymentUpfront": false
+          }
+        ],
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^(.)*$",
+              "type": "string",
+              "description": "Name for the name value pair",
+              "example": "Key"
+            },
+            "value": {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^(.)*$",
+              "type": "string",
+              "description": "Value for the name value pair",
+              "example": "Value"
+            }
+          }
+        }
+      },
+      "ProductType": {
+        "type": "string",
+        "description": "Indicates Product Type, element is mandatory for Offer create and update operations.",
+        "example": "SERVICE",
+        "enum": [
+          "SERVICE",
+          "FINANCIAL",
+          "DEVICE",
+          "ACCESSORY",
+          "PREMIUMCONTENT",
+          "RATEPLAN",
+          "BUNDLE",
+          "SUBSCRIPTION"
+        ]
+      },
+      "ProductSubType": {
+        "type": "string",
+        "description": "Indicates Product Sub Type, element is mandatory for Offer create and update operations.",
+        "example": "DATA",
+        "enum": [
+          "UCAAS",
+          "VOICE",
+          "TEXT",
+          "DATA",
+          "THIRDPARTYCONTENT",
+          "BILLABLECONTENT",
+          "INSURANCE",
+          "WARRANTY",
+          "EARLYUPGRADE",
+          "EQUIPMENTINSTALLMENTPLAN",
+          "DEVICETRADEIN",
+          "ELECTRONICPREPAIDREFILL",
+          "CARDPREPAIDREFILL",
+          "HANDSET",
+          "OTHERACCESSORY",
+          "CONNECTEDWEARABLE",
+          "TABLET",
+          "SIMCARD",
+          "COVERAGE",
+          "HOME",
+          "MOBILEINTERNET",
+          "WEARABLE",
+          "NETWORKCONFIGURATION",
+          "SERVICEFEE",
+          "ESIM",
+          "SAAS"
+        ]
+      },
+      "ProductClassification": {
+        "type": "string",
+        "description": "Indicates Product Classification operations.",
+        "example": "DIALPAD",
+        "enum": [
+          "DIALPAD",
+          "IOTCONNECTIVITY",
+          "PACKAGEDPRODUCTS",
+          "BUSINESSSOFTWARESOLUTIONS"
+        ]
+      },
+      "MobileNetworkOperator": {
+        "type": "string",
+        "description": "Mobile Network Operator Origin",
+        "example": "Bell Canada"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "oauth2-accessCode": {
+        "type": "oauth2",
+        "description": "The most common flow, mostly used for server-side and mobile web applications. This flow is similar to how users sign up into a web application using their Facebook or Google account.",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://example.com/oauth/authorize",
+            "tokenUrl": "https://tmobileb-sb01.apigee.net/v1/oauth2/accesstoken?grant_type=client_credentials",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://icpdevgetproductconfig.azurewebsites.net",
+      "description": "Get Product Config, Dev environment"
+    }
+  ]
+}
